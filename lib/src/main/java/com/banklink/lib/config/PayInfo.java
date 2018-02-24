@@ -77,7 +77,7 @@ public class PayInfo {
      */
     private void setDefault() {
         if (TextUtils.isEmpty(appName)) {
-            appName = AppUtils.getAppName();
+            appName = ConfigInfo.APP_NAME;
         }
         if (TextUtils.isEmpty(remarks)) {
             remarks = appName;
@@ -89,7 +89,7 @@ public class PayInfo {
             pnrDevId = ConfigInfo.NO_STRING_DATA;
         }
         if (TextUtils.isEmpty(appKey)) {
-            appKey = AppUtils.getAppSignatureSHA1().replaceAll(ConfigInfo.SEMICOLON, ConfigInfo.NO_STRING_DATA).toLowerCase();
+            appKey = ConfigInfo.APP_KEY;
         }
         if (TextUtils.isEmpty(tradeType)) {
             tradeType = ConfigInfo.BANK_CARD;

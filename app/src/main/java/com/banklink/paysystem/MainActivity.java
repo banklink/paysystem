@@ -7,8 +7,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.banklink.lib.BLPay;
-import com.banklink.lib.BLPayListener;
 import com.banklink.lib.config.ConfigInfo;
+import com.banklink.lib.listener.BLPayListener;
 
 public class MainActivity extends AppCompatActivity {
 

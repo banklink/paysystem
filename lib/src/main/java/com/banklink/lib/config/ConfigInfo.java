@@ -7,6 +7,7 @@ package com.banklink.lib.config;
  */
 
 public class ConfigInfo {
+    public static final int DELAY_300 = 300;
 
     public static final String BANK_CARD = "02";
 
@@ -29,4 +30,8 @@ public class ConfigInfo {
     public static final String PAY_KEY = "payInfo";
 
     public static final int REQ_ID = 0x0A1;
+
+    public static String APP_NAME;
+
+    public static String APP_KEY;
 }
