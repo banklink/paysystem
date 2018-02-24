@@ -7,6 +7,7 @@ package com.banklink.lib.config;
  */
 
 public class ConfigInfo {
+
     public static final String BANK_CARD = "02";
 
     public static final String NO_STRING_DATA = "";

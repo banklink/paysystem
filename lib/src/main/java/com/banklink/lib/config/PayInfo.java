@@ -37,33 +37,21 @@ public class PayInfo {
 
     private String appKey;
 
-    public String getOrderId() {
-        return orderId;
-    }
-
     public PayInfo setOrderId(String orderId) {
         this.orderId = orderId;
         return this;
     }
 
-    public String getBgRetUrl() {
-        return bgRetUrl;
-    }
 
     public PayInfo setBgRetUrl(String bgRetUrl) {
         this.bgRetUrl = bgRetUrl;
         return this;
     }
 
-    public String getOrderAmt() {
-        return orderAmt;
-    }
-
     public PayInfo setOrderAmt(String orderAmt) {
         this.orderAmt = orderAmt;
         return this;
     }
-
 
     @Override
     public String toString() {
@@ -81,6 +69,12 @@ public class PayInfo {
                 '}';
     }
 
+    /**
+     * To pay some empty values to the default configuration parameters, has been helping developers
+     * to get into the application name, applications of signature, and other information,
+     * developers need to focus only on the number of incoming orders, the order amount and pay
+     * the callback url
+     */
     private void setDefault() {
         if (TextUtils.isEmpty(appName)) {
             appName = AppUtils.getAppName();
