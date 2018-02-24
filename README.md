@@ -1,4 +1,4 @@
-[![paysystem](https://jitpack.io/v/banklink/paysystem.svg)](https://github.com/banklink/paysystem) 
+[![](https://img.shields.io/badge/paysystem-1.0-green.svg)](https://github.com/banklink/paysystem) 
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 
 # How to
