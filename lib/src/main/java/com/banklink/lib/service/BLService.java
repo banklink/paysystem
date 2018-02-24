@@ -20,7 +20,7 @@ import com.landicorp.android.eptapi.exception.UnsupportMultiProcess;
 public class BLService {
 
     //login
-    public static void bindDeviceService(final Activity activity) {
+    public void bindDeviceService(final Activity activity) {
         try {
             DeviceService.login(activity);
         } catch (RequestException e) {
@@ -44,7 +44,7 @@ public class BLService {
     }
 
     //logout
-    public static void unbindDeviceService() {
+    public void unbindDeviceService() {
         DeviceService.logout();
     }
 }

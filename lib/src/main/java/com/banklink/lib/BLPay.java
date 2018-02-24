@@ -13,6 +13,7 @@ import com.banklink.lib.listener.BLPayListener;
 import com.banklink.lib.service.BLService;
 import com.banklink.lib.utils.AppUtils;
 import com.banklink.lib.utils.Utils;
+import com.landicorp.android.eptapi.DeviceService;
 import com.landicorp.android.eptapi.utils.SystemInfomation;
 import com.lzy.okgo.OkGo;
 
@@ -90,7 +91,7 @@ public class BLPay extends BLService {
      * @param listener    Pay the callback listener.
      */
     public static void payResult(int requestCode, int resultCode, Intent data, BLPayListener listener) {
-        unbindDeviceService();
+        DeviceService.logout();
         if (requestCode == ConfigInfo.REQ_ID) {
             switch (resultCode) {
                 case ConfigInfo.RESULT_SUCCESS:
