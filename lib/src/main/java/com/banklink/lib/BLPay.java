@@ -43,6 +43,14 @@ public class BLPay {
         Utils.init(app);
     }
 
+    /**
+     * The method of setting up a transaction.
+     *
+     * @param orderId  The order number
+     * @param orderAmt The order amount
+     * @param bgRetUrl Transaction callback url.
+     * @param activity Context activity
+     */
     public static void pay(String orderId, String orderAmt, String bgRetUrl, Activity activity) {
         if (TextUtils.isEmpty(orderId) && TextUtils.isEmpty(orderAmt) && TextUtils.isEmpty(bgRetUrl)) {
             throw new NullPointerException("orderId or orderAmt or bgRetUrl is null");
@@ -57,5 +65,33 @@ public class BLPay {
             activity.startActivityForResult(intent, ConfigInfo.REQ_ID);
         }
     }
+
+    /**
+     * Payment callback method, including payment success, payment failure and payment cancellation.
+     *
+     * @param requestCode The originating request code.
+     * @param resultCode Payment result code
+     * @param data Payment result data
+     * @param listener Pay the callback listener.
+     */
+    public static void payResult(int requestCode, int resultCode, Intent data, BLPayListener listener) {
+        if (requestCode == ConfigInfo.REQ_ID) {
+            switch (resultCode) {
+                case ConfigInfo.RESULT_SUCCESS:
+                    if (data.hasExtra(ConfigInfo.PAY_RESULT)) {
+                        String resultJson = data.getStringExtra(ConfigInfo.PAY_RESULT);
+                        listener.paySuccess(resultJson);
+                    }
+                    break;
+                case ConfigInfo.RESULT_CANCEL:
+                    listener.payCancel();
+                    break;
+                case ConfigInfo.RESULT_FAILURE:
+                    listener.payFailure();
+                    break;
+            }
+        }
+    }
+
 
 }

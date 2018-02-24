@@ -13,6 +13,14 @@ public class ConfigInfo {
 
     public static final String SEMICOLON = ":";
 
+    public static final String PAY_RESULT = "payResult";
+
+    public static final int RESULT_FAILURE = -2;
+
+    public static final int RESULT_SUCCESS = -1;
+
+    public static final int RESULT_CANCEL = 0;
+
     public static final String PACKAGE_NAME = "com.chinapnr.android.aznpos";
 
     public static final String CLASS_NAME = "com.chinapnr.android.aznpos.views.activity.ChoosePayActivity";

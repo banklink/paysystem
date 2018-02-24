@@ -1,9 +1,14 @@
 package com.banklink.paysystem;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.banklink.lib.BLPay;
+import com.banklink.lib.BLPayListener;
+import com.banklink.lib.config.ConfigInfo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,5 +17,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.btn_pay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BLPay.pay("123123123", "1", "www.baidu.com", MainActivity.this);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        BLPay.payResult(requestCode, resultCode, data, new BLPayListener() {
+            @Override
+            public void paySuccess(String result) {
+                Log.e("支付结果", "支付回调成功");
+            }
+
+            @Override
+            public void payCancel() {
+                Log.e("支付结果", "支付回调取消");
+            }
+
+            @Override
+            public void payFailure() {
+                Log.e("支付结果", "支付回调失败");
+            }
+        });
     }
 }
