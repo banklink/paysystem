@@ -4,7 +4,7 @@
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://github.com/banklink/paysystem)
 [![](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/banklink/paysystem)
 [![](https://img.shields.io/badge/insignt.io-Ready-brightgreen.svg)](https://github.com/banklink/paysystem)
-[![](https://img.shields.io/badge/License-Apache-2.0-brightgreen.svg)](https://github.com/banklink/paysystem/blob/master/LICENSE.txt) 
+[![](https://img.shields.io/badge/License-Apache--2.0-brightgreen.svg)](https://github.com/banklink/paysystem/blob/master/LICENSE.txt) 
 
 # How to
 
