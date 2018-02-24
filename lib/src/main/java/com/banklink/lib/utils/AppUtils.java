@@ -1,4 +1,4 @@
-package com.banklink.lib;
+package com.banklink.lib.utils;
 
 import android.annotation.SuppressLint;
 import android.content.pm.PackageInfo;
