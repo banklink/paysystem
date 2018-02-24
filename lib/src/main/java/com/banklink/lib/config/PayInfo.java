@@ -1,5 +1,9 @@
 package com.banklink.lib.config;
 
+import android.text.TextUtils;
+
+import com.banklink.lib.AppUtils;
+
 /**
  * Created by FynnJason.
  * <p>
@@ -11,4 +15,90 @@ package com.banklink.lib.config;
  */
 
 public class PayInfo {
+
+    public PayInfo() {
+    }
+
+    private String orderId;
+
+    private String orderAmt;
+
+    private String memberId;
+
+    private String pnrDevId;
+
+    private String bgRetUrl;
+
+    private String tradeType;
+
+    private String remarks;
+
+    private String appName;
+
+    private String appKey;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public PayInfo setOrderId(String orderId) {
+        this.orderId = orderId;
+        return this;
+    }
+
+    public String getBgRetUrl() {
+        return bgRetUrl;
+    }
+
+    public PayInfo setBgRetUrl(String bgRetUrl) {
+        this.bgRetUrl = bgRetUrl;
+        return this;
+    }
+
+    public String getOrderAmt() {
+        return orderAmt;
+    }
+
+    public PayInfo setOrderAmt(String orderAmt) {
+        this.orderAmt = orderAmt;
+        return this;
+    }
+
+
+    @Override
+    public String toString() {
+        setDefault();
+        return "{" +
+                "orderId:'" + orderId + '\'' +
+                ", orderAmt:'" + orderAmt + '\'' +
+                ", memberId:'" + memberId + '\'' +
+                ", pnrDevId:'" + pnrDevId + '\'' +
+                ", bgRetUrl:'" + bgRetUrl + '\'' +
+                ", tradeType:'" + tradeType + '\'' +
+                ", remarks:'" + remarks + '\'' +
+                ", appName:'" + appName + '\'' +
+                ", appKey:'" + appKey + '\'' +
+                '}';
+    }
+
+    private void setDefault() {
+        if (TextUtils.isEmpty(appName)) {
+            appName = AppUtils.getAppName();
+        }
+        if (TextUtils.isEmpty(remarks)) {
+            remarks = appName;
+        }
+        if (TextUtils.isEmpty(memberId)) {
+            memberId = ConfigInfo.NO_STRING_DATA;
+        }
+        if (TextUtils.isEmpty(pnrDevId)) {
+            pnrDevId = ConfigInfo.NO_STRING_DATA;
+        }
+        if (TextUtils.isEmpty(appKey)) {
+            appKey = AppUtils.getAppSignatureSHA1().replaceAll(ConfigInfo.SEMICOLON, ConfigInfo.NO_STRING_DATA).toLowerCase();
+        }
+        if (TextUtils.isEmpty(tradeType)) {
+            tradeType = ConfigInfo.BANK_CARD;
+        }
+    }
 }
