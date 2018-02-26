@@ -9,10 +9,12 @@ import android.util.Log;
 
 import com.banklink.lib.config.ConfigInfo;
 import com.banklink.lib.config.PayInfo;
+import com.banklink.lib.config.ResultInfo;
 import com.banklink.lib.listener.BLPayListener;
 import com.banklink.lib.service.BLService;
 import com.banklink.lib.utils.AppUtils;
 import com.banklink.lib.utils.Utils;
+import com.google.gson.Gson;
 import com.landicorp.android.eptapi.DeviceService;
 import com.landicorp.android.eptapi.utils.SystemInfomation;
 import com.lzy.okgo.OkGo;
@@ -100,7 +102,8 @@ public class BLPay extends BLService {
                 case ConfigInfo.RESULT_SUCCESS:
                     if (data.hasExtra(ConfigInfo.PAY_RESULT)) {
                         String resultJson = data.getStringExtra(ConfigInfo.PAY_RESULT);
-                        listener.paySuccess(resultJson);
+                        ResultInfo info = new Gson().fromJson(resultJson, ResultInfo.class);
+                        listener.paySuccess(info);
                     }
                     break;
                 case ConfigInfo.RESULT_CANCEL:

@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.banklink.lib.BLPay;
 import com.banklink.lib.config.ConfigInfo;
+import com.banklink.lib.config.ResultInfo;
 import com.banklink.lib.listener.BLPayListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         BLPay.payResult(requestCode, resultCode, data, new BLPayListener() {
             @Override
-            public void paySuccess(String result) {
-                Log.e("支付结果", "支付回调成功");
+            public void paySuccess(ResultInfo result) {
+                Log.e("支付结果", "支付回调成功"+result);
             }
 
             @Override
