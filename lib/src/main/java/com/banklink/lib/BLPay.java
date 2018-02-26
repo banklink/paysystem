@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.banklink.lib.config.ConfigInfo;
+import com.banklink.lib.config.OnlyInfo;
 import com.banklink.lib.config.PayInfo;
 import com.banklink.lib.config.ResultInfo;
 import com.banklink.lib.listener.BLPayListener;
@@ -58,9 +59,10 @@ public class BLPay extends BLService {
     private void initConfig(Application app) {
         OkGo.getInstance().init(app).setOkHttpClient(new OkHttpClient.Builder().build());
         Utils.init(app);
-        ConfigInfo.APP_NAME= AppUtils.getAppName();
+        ConfigInfo.APP_NAME = AppUtils.getAppName();
         ConfigInfo.APP_KEY = AppUtils.getAppSignatureSHA1().replaceAll(ConfigInfo.SEMICOLON, ConfigInfo.NO_STRING_DATA).toLowerCase();
     }
+
     /**
      * The method of setting up a transaction.
      *
@@ -102,8 +104,10 @@ public class BLPay extends BLService {
                 case ConfigInfo.RESULT_SUCCESS:
                     if (data.hasExtra(ConfigInfo.PAY_RESULT)) {
                         String resultJson = data.getStringExtra(ConfigInfo.PAY_RESULT);
-                        ResultInfo info = new Gson().fromJson(resultJson, ResultInfo.class);
-                        listener.paySuccess(info);
+                        ResultInfo result = new Gson().fromJson(resultJson, ResultInfo.class);
+                        OnlyInfo i = new OnlyInfo();
+                        i.setOrderId(result.getOrderId()).setSerialNum(result.getSerialNum()).setVoucherNo(result.getVoucherNo());
+                        listener.paySuccess(result);
                     }
                     break;
                 case ConfigInfo.RESULT_CANCEL:
