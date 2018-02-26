@@ -91,6 +91,9 @@ public class BLPay extends BLService {
      * @param listener    Pay the callback listener.
      */
     public static void payResult(int requestCode, int resultCode, Intent data, BLPayListener listener) {
+        //Use the equipment to log out the main control service.
+        //Release financial equipment to make other applications available.
+        //To use financial equipment.
         DeviceService.logout();
         if (requestCode == ConfigInfo.REQ_ID) {
             switch (resultCode) {
