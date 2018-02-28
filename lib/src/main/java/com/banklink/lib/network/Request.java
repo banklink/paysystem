@@ -1,15 +1,12 @@
 package com.banklink.lib.network;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
-import com.banklink.lib.config.ResultInfo;
+import com.banklink.lib.config.ConfigInfo;
+import com.banklink.lib.config.PotInfo;
+import com.banklink.lib.config.PrInfo;
 import com.banklink.lib.utils.Cfb_256crypt;
-import com.banklink.lib.utils.MD5Util;
 import com.banklink.lib.utils.TimeUtils;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Response;
 
 /**
  * Created by FynnJason.
@@ -18,53 +15,34 @@ import com.lzy.okgo.model.Response;
  */
 
 public class Request {
+    private static String out_no, posCode, totalFee;
 
-    private static String appKey = "7d546ddd9223cfasf5df0e124266b092";
-    private static String appId = "68ccdfadf66affab10ecdfc90abf8c62";
-    private static String encryptKey = "6fa5616gg3ac92228a9dd9a0be5cac9f";
-
-    public static void upPayOrder() {
+    public static void upPayOrder(PotInfo potInfo) {
 
         @SuppressLint("DefaultLocale")
         String timestamp = String.format("%010d", TimeUtils.getNowMills() / 1000);
+        out_no = potInfo.getOutNo();
+        posCode = potInfo.getPosCode();
+        totalFee = potInfo.getTotalFee();
+        String data = Cfb_256crypt.encrypt(ConfigInfo.ENCRYPT_KEY, potInfo.toString());
 
-        String json = "{" + "\"pos_code\":\"" + "rdg1201\"" +
-                ", \"out_no\":\"" + "10005\"" +
-                ", \"total_fee\":\"" + "1" + "\"" +
-                '}';
-        Log.e("Request", "json：" + json);
-
-        String data = Cfb_256crypt.encrypt(encryptKey, json);
-
-        Log.e("Request", "data：" + data);
-
-        String addMi = "appId=" + appId + "&data=" + data + "&ts=" + timestamp + appKey;
-
-        Log.e("Request", "addMi：" + addMi);
-
-        String sign = MD5Util.getMD5(Cfb_256crypt.getSHA256StrJava(addMi)).toLowerCase();
-
-        Log.e("Request", "sign：" + sign);
-
-        OkGo.<String>post("http://test.beikelin.com/paycard/")
-                .params("appId", appId)
-                .params("ts", timestamp)
-                .params("data", data)
-                .params("sign", sign)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        Log.e("Request", "onSuccess：" + response.body());
-                    }
-
-                    @Override
-                    public void onError(Response<String> response) {
-                        Log.e("Request", "onError：" + response.toString());
-                    }
-                });
+        Net.upPayCall(data, timestamp);
     }
 
-    public static void upPayResult(ResultInfo resultInfo) {
+    public static void upPayResult(String orderId, String status, String error_code) {
+        @SuppressLint("DefaultLocale")
+        String timestamp = String.format("%010d", TimeUtils.getNowMills() / 1000);
+        PrInfo prInfo = new PrInfo();
+        prInfo.setOutNo(out_no)
+                .setPosCode(posCode)
+                .setError_code(error_code)
+                .setOrderId(orderId)
+                .setTotalFee(totalFee)
+                .setStatus(status);
+        String data = Cfb_256crypt.encrypt(ConfigInfo.ENCRYPT_KEY, prInfo.toString());
 
+        Net.upResultCall(data, timestamp);
     }
+
+
 }

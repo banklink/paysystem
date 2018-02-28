@@ -34,4 +34,30 @@ public class ConfigInfo {
     public static String APP_NAME;
 
     public static String APP_KEY;
+
+    public static String APP_ID;
+
+    public static String ENCRYPT_KEY;
+
+    public static String POS_CODE;
+
+    public static final String APP_ID_TAG = "appId";
+
+    public static final String TIME_STAMP_TAG = "ts";
+
+    public static final String DATA_TAG = "data";
+
+    public static final String SIGN_TAG = "sign";
+
+    public static final String ORD_NO = "ord_no";
+
+    public static final String STATUS = "status";
+
+    public static final String ERROR_CODE = "error_code";
+
+    public static final String PAY_SUCCESS = "1";
+
+    public static final String PAY_CANCEL = "3";
+
+    public static final String PAY_FAILURE = "0";
 }

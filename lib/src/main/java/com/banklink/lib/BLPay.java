@@ -5,23 +5,21 @@ import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.banklink.lib.config.ConfigInfo;
-import com.banklink.lib.config.OnlyInfo;
 import com.banklink.lib.config.PayInfo;
+import com.banklink.lib.config.PotInfo;
 import com.banklink.lib.config.ResultInfo;
 import com.banklink.lib.listener.BLPayListener;
+import com.banklink.lib.network.Net;
+import com.banklink.lib.network.Request;
 import com.banklink.lib.service.BLService;
 import com.banklink.lib.utils.AppUtils;
-import com.banklink.lib.utils.TimeUtils;
 import com.banklink.lib.utils.Utils;
 import com.google.gson.Gson;
 import com.landicorp.android.eptapi.DeviceService;
 import com.landicorp.android.eptapi.utils.SystemInfomation;
-import com.lzy.okgo.OkGo;
 
-import okhttp3.OkHttpClient;
 
 /**
  * Created by FynnJason.
@@ -48,8 +46,8 @@ public class BLPay extends BLService {
      *
      * @param app Application
      */
-    public void init(Application app) {
-        initConfig(app);
+    public void init(Application app, String appId, String appKey, String encryptKey) {
+        initConfig(app, appId, appKey, encryptKey);
     }
 
     /**
@@ -57,11 +55,15 @@ public class BLPay extends BLService {
      *
      * @param app Application
      */
-    private void initConfig(Application app) {
-        OkGo.getInstance().init(app).setOkHttpClient(new OkHttpClient.Builder().build());
+    private void initConfig(Application app, String appId, String appKey, String encryptKey) {
+        Net.init(app);
         Utils.init(app);
+//        ConfigInfo.POS_CODE = SystemInfomation.getDeviceInfo().getSpecialSerialNo();
+        ConfigInfo.POS_CODE = "rdg1201";
         ConfigInfo.APP_NAME = AppUtils.getAppName();
-        ConfigInfo.APP_KEY = AppUtils.getAppSignatureSHA1().replaceAll(ConfigInfo.SEMICOLON, ConfigInfo.NO_STRING_DATA).toLowerCase();
+        ConfigInfo.APP_KEY = appKey;
+        ConfigInfo.APP_ID = appId;
+        ConfigInfo.ENCRYPT_KEY = encryptKey;
     }
 
     /**
@@ -76,6 +78,9 @@ public class BLPay extends BLService {
         if (TextUtils.isEmpty(orderId) && TextUtils.isEmpty(orderAmt) && TextUtils.isEmpty(bgRetUrl)) {
             throw new NullPointerException("orderId or orderAmt or bgRetUrl is null");
         } else {
+            PotInfo potInfo = new PotInfo();
+            potInfo.setPosCode(ConfigInfo.POS_CODE).setOutNo(orderId).setTotalFee(orderAmt);
+            Request.upPayOrder(potInfo);
             PayInfo info = new PayInfo();
             info.setOrderId(orderId).setOrderAmt(orderAmt).setBgRetUrl(bgRetUrl);
             Intent intent = new Intent();
@@ -106,15 +111,16 @@ public class BLPay extends BLService {
                     if (data.hasExtra(ConfigInfo.PAY_RESULT)) {
                         String resultJson = data.getStringExtra(ConfigInfo.PAY_RESULT);
                         ResultInfo result = new Gson().fromJson(resultJson, ResultInfo.class);
-                        OnlyInfo i = new OnlyInfo();
-                        i.setOrderId(result.getOrderId()).setSerialNum(result.getSerialNum()).setVoucherNo(result.getVoucherNo());
+                        Request.upPayResult(result.getOrderId(), ConfigInfo.PAY_SUCCESS, String.valueOf(ConfigInfo.RESULT_SUCCESS));
                         listener.paySuccess(result);
                     }
                     break;
                 case ConfigInfo.RESULT_CANCEL:
+                    Request.upPayResult(ConfigInfo.NO_STRING_DATA, ConfigInfo.PAY_CANCEL, String.valueOf(ConfigInfo.RESULT_CANCEL));
                     listener.payCancel();
                     break;
                 case ConfigInfo.RESULT_FAILURE:
+                    Request.upPayResult(ConfigInfo.NO_STRING_DATA, ConfigInfo.PAY_FAILURE, String.valueOf(ConfigInfo.RESULT_FAILURE));
                     listener.payFailure();
                     break;
             }

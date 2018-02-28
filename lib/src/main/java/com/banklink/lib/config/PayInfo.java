@@ -2,7 +2,6 @@ package com.banklink.lib.config;
 
 import android.text.TextUtils;
 
-import com.banklink.lib.utils.AppUtils;
 
 /**
  * Created by FynnJason.

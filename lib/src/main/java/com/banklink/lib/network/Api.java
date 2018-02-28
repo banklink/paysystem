@@ -6,8 +6,7 @@ package com.banklink.lib.network;
  */
 
 public class Api {
-    
-    public static final String UP_ORDER = "";
 
-    public static final String UP_PAY_RESULT = "";
+    public static final String UP_ORDER = "http://test.beikelin.com/paycard/";
+
 }
