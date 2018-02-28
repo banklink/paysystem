@@ -1,6 +1,7 @@
 package com.banklink.lib.network;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.banklink.lib.config.ConfigInfo;
 import com.banklink.lib.config.PotInfo;

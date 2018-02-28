@@ -29,7 +29,7 @@ public class Net {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        Log.e("Net", "onSuccess：pay");
+
                     }
                 });
     }
@@ -44,7 +44,7 @@ public class Net {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        Log.e("Net", "onSuccess：result");
+
                     }
                 });
     }
