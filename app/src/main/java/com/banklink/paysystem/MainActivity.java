@@ -10,6 +10,7 @@ import com.banklink.lib.BLPay;
 import com.banklink.lib.config.ConfigInfo;
 import com.banklink.lib.config.ResultInfo;
 import com.banklink.lib.listener.BLPayListener;
+import com.banklink.lib.network.Request;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btn_time).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Request.upPayOrder();
+            }
+        });
     }
 
     @Override

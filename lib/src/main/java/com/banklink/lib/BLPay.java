@@ -14,6 +14,7 @@ import com.banklink.lib.config.ResultInfo;
 import com.banklink.lib.listener.BLPayListener;
 import com.banklink.lib.service.BLService;
 import com.banklink.lib.utils.AppUtils;
+import com.banklink.lib.utils.TimeUtils;
 import com.banklink.lib.utils.Utils;
 import com.google.gson.Gson;
 import com.landicorp.android.eptapi.DeviceService;
