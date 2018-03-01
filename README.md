@@ -1,6 +1,6 @@
 [![](https://github.com/banklink/paysystem/blob/master/banklink_logo.png)](https://github.com/banklink/paysystem)
 
-[![](https://img.shields.io/badge/paysystem-1.1.1-brightgreen.svg)](https://github.com/banklink/paysystem) 
+[![](https://img.shields.io/badge/paysystem-1.1.2-brightgreen.svg)](https://github.com/banklink/paysystem) 
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://github.com/banklink/paysystem)
 [![](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/banklink/paysystem)
 [![](https://img.shields.io/badge/insignt.io-Ready-brightgreen.svg)](https://github.com/banklink/paysystem)
@@ -27,7 +27,8 @@ Add it in your root build.gradle at the end of repositories:
 	
 ### Step 2. Add the dependency
 	dependencies {
-	        compile 'com.github.banklink:paysystem:1.1.1'
+	        compile 'com.github.banklink:paysystem:1.1.2'
 	}
+
 
 
