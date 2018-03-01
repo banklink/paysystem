@@ -135,4 +135,24 @@ public class ResultInfo {
     public void setVoucherNo(String voucherNo) {
         this.voucherNo = voucherNo;
     }
+
+    @Override
+    public String toString() {
+        return "ResultInfo{" +
+                "bankName='" + bankName + '\'' +
+                ", batchId='" + batchId + '\'' +
+                ", merName='" + merName + '\'' +
+                ", serialNum='" + serialNum + '\'' +
+                ", orderAmt='" + orderAmt + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", payCardId='" + payCardId + '\'' +
+                ", refNo='" + refNo + '\'' +
+                ", resultCode='" + resultCode + '\'' +
+                ", tradeDesc='" + tradeDesc + '\'' +
+                ", tradeType='" + tradeType + '\'' +
+                ", transDate='" + transDate + '\'' +
+                ", transTime='" + transTime + '\'' +
+                ", voucherNo='" + voucherNo + '\'' +
+                '}';
+    }
 }
