@@ -58,8 +58,8 @@ public class BLPay extends BLService {
     private void initConfig(Application app, String appId, String appKey, String encryptKey) {
         Net.init(app);
         Utils.init(app);
-//        ConfigInfo.POS_CODE = SystemInfomation.getDeviceInfo().getSpecialSerialNo();
-        ConfigInfo.POS_CODE = "rdg1201";
+        ConfigInfo.POS_CODE = SystemInfomation.getDeviceInfo().getSpecialSerialNo();
+//        ConfigInfo.POS_CODE = "rdg1201";
         ConfigInfo.APP_NAME = AppUtils.getAppName();
         ConfigInfo.APP_KEY = appKey;
         ConfigInfo.APP_ID = appId;

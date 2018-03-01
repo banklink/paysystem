@@ -29,7 +29,7 @@ public class Net {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-
+                        System.out.print(response.code());
                     }
                 });
     }
@@ -44,7 +44,7 @@ public class Net {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-
+                        System.out.print(response.code());
                     }
                 });
     }
