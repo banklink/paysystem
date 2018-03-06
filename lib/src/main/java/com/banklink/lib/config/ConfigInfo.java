@@ -63,4 +63,10 @@ public class ConfigInfo {
     public static final String PAY_CANCEL = "3";
 
     public static final String PAY_FAILURE = "0";
+
+    public static final String SIGN_APPID="appId=";
+
+    public static final String SIGN_DATA = "&data=";
+
+    public static final String SIGN_TS = "&ts=";
 }

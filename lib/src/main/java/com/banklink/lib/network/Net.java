@@ -1,6 +1,7 @@
 package com.banklink.lib.network;
 
 import android.app.Application;
+import android.nfc.Tag;
 import android.util.Log;
 
 import com.banklink.lib.config.ConfigInfo;
@@ -19,6 +20,8 @@ import okhttp3.OkHttpClient;
 
 public class Net {
 
+    private static final String TAG="NET";
+
     public static void upPayCall(String data, String timestamp) {
 
         OkGo.<String>post(Api.UP_ORDER)
@@ -29,7 +32,7 @@ public class Net {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        System.out.print(response.code());
+                        Log.d(TAG, "onSuccess: "+response.body());
                     }
                 });
     }
