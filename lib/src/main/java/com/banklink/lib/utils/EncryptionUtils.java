@@ -64,7 +64,7 @@ public class EncryptionUtils {
      * @param ts ts
      * @return
      */
-    public static String sign(String data,String ts) {
+    private static String sign(String data,String ts) {
 
         String c = ConfigInfo.SIGN_APPID + ConfigInfo.APP_ID + ConfigInfo.SIGN_DATA + data + ConfigInfo.SIGN_TS + ts +ConfigInfo.APP_KEY;
 
